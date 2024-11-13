@@ -64,13 +64,15 @@ describe("WhiteList", function () {
         expect(await whitelistContract.nftCount()).to.equal(1);
       });
       it("Should only allow whitelist to mint", async function () {
-        const { whitelistContract, uri, addr1, tree, owner, addr2 } =
+        const { whitelistContract, uri, tree, owner, addr2 } =
           await loadFixture(runEveryTime);
         const leaf = keccak256(owner.address);
         const proof = tree.getHexProof(leaf);
         await expect(
-          whitelistContract.connect(addr2).mintNFT(addr2.address, uri, proof)
-        ).to.be.revertedWith("Not WhiteListed Address");
+          whitelistContract.connect(owner).mintNFT(addr2.address, uri, proof)
+        )
+          .to.emit(whitelistContract, "NftMinted")
+          .withArgs(addr2.address, 0);
       });
       it("should fail for whitelist with incorrect proof", async function () {
         const { whitelistContract, uri, addr1, tree, owner } =
@@ -80,6 +82,16 @@ describe("WhiteList", function () {
         await expect(
           whitelistContract.connect(addr1).mintNFT(addr1.address, uri, proof)
         ).to.be.revertedWith("Not WhiteListed Address");
+      });
+      it("Should return correct URI", async function () {
+        const { whitelistContract, uri, addr2, tree, owner } =
+          await loadFixture(runEveryTime);
+        const leaf = keccak256(owner.address);
+        const proof = tree.getHexProof(leaf);
+        await whitelistContract
+          .connect(owner)
+          .mintNFT(addr2.address, uri, proof);
+        expect(await whitelistContract.tokenURI(0)).to.equal(uri);
       });
     });
   });
