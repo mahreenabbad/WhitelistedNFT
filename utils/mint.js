@@ -1,4 +1,4 @@
-const { ethers, network, artifacts } = require("hardhat");
+const { ethers, artifacts } = require("hardhat");
 
 // const fs = require("fs");
 require("dotenv").config();

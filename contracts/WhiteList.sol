@@ -5,7 +5,7 @@ import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 
 contract WhiteList is ERC721, ERC721URIStorage {
-    bytes32 public rootHash; //this will be generate either from front end or backend
+    bytes32 public rootHash;
 
     uint public nftCount = 0;
 
