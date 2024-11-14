@@ -46,17 +46,10 @@ contract WhiteList is ERC721, ERC721URIStorage {
         return super.supportsInterface(interfaceId);
     }
 }
+// random winner
+// 10 tickets as voucher (image same) mint to different wallets and receive ether from wallets => select 1 winner
+// offchain randomness => third party => winner
+// winner address store on marketplace
 
-// modifier isWhitelistedAddress(bytes32[] calldata proof) {
-// require(
-//     verifyProof(proof, keccak256(abi.encodePacked(msg.sender))),
-//     "Not WhiteListed Address"
-// );
-// _;
-// }
-
-// function onlyWhitelisted(
-//     bytes32[] calldata proof
-// ) public view isWhitelistedAddress(proof) returns (uint8) {
-//     return 5;
-// }
+// f1 voucher mint
+// f2 select winner nft transfer(transferfrom )

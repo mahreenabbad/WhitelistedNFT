@@ -15,13 +15,8 @@ async function main() {
   const provider = new ethers.JsonRpcProvider(rpcUrl, undefined, {
     staticNetwork: true,
   });
-  //fc88db1c3738099ff0798fca7c2859116f540019015e4c51fc074ca96671bf14 whitelist 1
-  //e8762f3ab439ec175dc523df551b5fc6960ff552302ed7ec6252a5dd67cb4928 whiteList 2
-  //f1cdd843a12b8e3ca694679c0da3e0ae8dd143c2e012cc693043b5fb0206a24c not whitlist
-  const signer = new ethers.Wallet(
-    "e8762f3ab439ec175dc523df551b5fc6960ff552302ed7ec6252a5dd67cb4928",
-    provider
-  );
+  const PRIVATE_KEY = process.env.PRIVATE_KEY_WHITELIST2;
+  const signer = new ethers.Wallet(PRIVATE_KEY, provider);
 
   console.log("signer :", signer);
 
